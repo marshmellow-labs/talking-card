@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { makeRound, LEVELS, rng, shuffle, deck, addStar, totalStars, withArticle } from '../src/games.js';
+import { makeRound, LEVELS, rng, shuffle, deck, addStar, totalStars, withArticle, bestGrid } from '../src/games.js';
 
 const cards = JSON.parse(fs.readFileSync(new URL('../cards.json', import.meta.url), 'utf8'));
 
@@ -63,4 +63,19 @@ test('articles read naturally', () => {
   assert.equal(withArticle({ name: 'Owl', category: 'animal' }), 'an Owl');
   assert.equal(withArticle({ name: 'Duck', category: 'animal' }), 'a Duck');
   assert.equal(withArticle({ name: 'Taj Mahal', category: 'place' }), 'Taj Mahal');
+});
+
+test('choice grid always fits inside the stage', () => {
+  // phone portrait, Fold inner screen, phone landscape, tiny
+  for (const [W, H] of [[388, 560], [860, 700], [780, 260], [300, 300]]) for (const n of [3, 4, 6]) {
+    const gap = 10, { cols, tile } = bestGrid(n, W, H, gap), rows = Math.ceil(n / cols);
+    assert.ok(cols * tile + (cols - 1) * gap <= W + 0.5, `width ${W}x${H} n=${n}`);
+    assert.ok(rows * tile / 0.72 + (rows - 1) * gap <= H + 1, `height ${W}x${H} n=${n}`);
+    assert.ok(tile > 40, 'tiles stay tappable');
+  }
+});
+
+test('choice grid prefers one row on wide screens and stacks on tall ones', () => {
+  assert.equal(bestGrid(3, 860, 700).cols, 3);
+  assert.equal(bestGrid(4, 388, 560).cols, 2);
 });

@@ -58,3 +58,14 @@ export function withArticle(card) {
   if (['place', 'color', 'family', 'nature'].includes(card.category) || /^the /i.test(card.name)) return card.name;
   return (/^[aeiou]/i.test(card.name) ? 'an ' : 'a ') + card.name;
 }
+
+/** Pick columns so n mini cards (aspect 0.72) are as large as possible inside the stage. */
+export function bestGrid(n, W, H, gap = 10, aspect = 0.72) {
+  let best = { cols: 1, tile: 0 };
+  for (let cols = 1; cols <= n; cols++) {
+    const rows = Math.ceil(n / cols);
+    const tile = Math.min((W - gap * (cols - 1)) / cols, ((H - gap * (rows - 1)) / rows) * aspect);
+    if (tile > best.tile) best = { cols, tile: Math.floor(tile) };
+  }
+  return best;
+}
