@@ -1,0 +1,189 @@
+[
+ {
+  "file": "black-floor.jpg",
+  "name": "Black",
+  "code": 2,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "sky-floor.jpg",
+  "name": "Sky",
+  "code": 27,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "father-floor.jpg",
+  "name": "Father",
+  "code": 39,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "star-floor.jpg",
+  "name": "Star",
+  "code": 51,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "fox-floor.jpg",
+  "name": "Fox",
+  "code": 64,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "whale-floor.jpg",
+  "name": "Whale",
+  "code": 73,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "pizza-floor.jpg",
+  "name": "Pizza",
+  "code": 92,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "doll-floor.jpg",
+  "name": "Doll",
+  "code": 126,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "taj-mahal-floor.jpg",
+  "name": "Taj Mahal",
+  "code": 136,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "train-floor.jpg",
+  "name": "Train",
+  "code": 161,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "jeep-floor.jpg",
+  "name": "Jeep",
+  "code": 168,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "corn-floor.jpg",
+  "name": "Corn",
+  "code": 181,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "lychee-floor.jpg",
+  "name": "Lychee",
+  "code": 212,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "coconut-floor.jpg",
+  "name": "Coconut",
+  "code": 215,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "fox-fox.jpg",
+  "name": "Fox",
+  "code": 64,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "corn-corn-fox.jpg",
+  "name": "Corn",
+  "code": 181,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ },
+ {
+  "file": "train-train.jpg",
+  "name": "Train",
+  "code": 161,
+  "expect": {
+   "x0": 0.069,
+   "x1": 0.931,
+   "y1": 0.7368,
+   "h": 5.2632
+  }
+ }
+]
