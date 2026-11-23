@@ -3,9 +3,40 @@ import { CardCamera } from '../camera.js';
 import { store, codeTable } from '../store.js';
 import { say, listVoices } from '../speech.js';
 import { icon } from '../icons.js';
+import { LEVELS } from '../games.js';
+import { chipGroup } from './chips.js';
 
 const $ = id => document.getElementById(id);
-let cards, cam, readCode = null;
+let cards, cam, readCode = null, ctx;
+
+// Theme previews: [mascot, background, three tile colors]
+const PREVIEW = {
+  sunny: ['🦉', '#fff8ee', '#9cc3f5', '#ffd35c', '#f7b6c8'],
+  space: ['🚀', '#17133a', '#7b5cff', '#00b8a0', '#ff5ca8'],
+  jungle: ['🐵', '#e7f5d3', '#8ad15a', '#ffcf4a', '#5ec8f2'],
+  candy: ['🦄', '#fff0f7', '#b69cff', '#7fe0d4', '#ffb3c7'],
+};
+
+function themes() {
+  const cur = store.get().settings.theme;
+  $('themes').replaceChildren(...Object.entries(ctx.themes).map(([k, t]) => {
+    const [m, bg, a, b, c] = PREVIEW[k];
+    const btn = document.createElement('button');
+    btn.className = 'theme-btn'; btn.setAttribute('aria-pressed', String(k === cur));
+    const sw = document.createElement('div'); sw.className = 'sw'; sw.dataset.m = m; sw.style.background = bg;
+    for (const col of [a, b, c]) { const i = document.createElement('i'); i.style.background = col; sw.append(i); }
+    const name = document.createElement('b'); name.textContent = t.label;
+    btn.append(sw, name);
+    btn.onclick = () => { store.setting('theme', k); ctx.applyTheme(k); themes(); };
+    return btn;
+  }));
+}
+
+function gameOptions() {
+  const s = store.get().settings;
+  chipGroup($('levels'), Object.entries(LEVELS).map(([k, L]) => ({ value: k, label: `${L.label} · ${L.choices} cards` })), s.level, v => store.setting('level', v));
+  $('optNames').checked = s.findNames; $('optColors').checked = s.findColors;
+}
 
 function library() {
   const table = codeTable(cards), codeOf = new Map([...table].map(([code, c]) => [c.id, code]));
@@ -36,9 +67,11 @@ function voices() {
 
 function stopTeach() { cam?.stop(); $('teachStart').textContent = '▶ Start camera'; }
 
-export function init(ctx) {
-  cards = ctx.cards;
+export function init(c) {
+  ctx = c; cards = c.cards;
   teachOptions();
+  $('optNames').onchange = e => store.setting('findNames', e.target.checked);
+  $('optColors').onchange = e => store.setting('findColors', e.target.checked);
   const view = $('teachCam');
   cam = new CardCamera(view, {
     known: null, // raw codes: a parent may be teaching a card the reader has never seen
@@ -93,5 +126,5 @@ export function init(ctx) {
   $('resetLearned').onclick = () => { if (confirm('Forget all cards taught on this device?')) { store.set({ learned: {} }); library(); } };
 }
 
-export function enter() { library(); voices(); }
+export function enter() { themes(); gameOptions(); library(); voices(); }
 export function leave() { stopTeach(); }
