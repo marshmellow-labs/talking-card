@@ -1,19 +1,49 @@
-# Talking Cards PWA
+# Talking Cards
 
-## Host on GitHub Pages
-1. Create a public GitHub repository.
-2. Upload the contents of this folder to the repository root (including `index.html`, `app.js`, `cards.json`, manifest, service worker, and icons).
-3. Open repository **Settings → Pages**; set **Deploy from a branch**, select `main` and `/ (root)`, and save.
-4. Open `https://YOUR-USERNAME.github.io/YOUR-REPO/` once Pages deploys. The HTTPS URL permits camera requests.
+A phone/tablet web app for **Wembley Talking Flash Cards** when the physical reader is lost:
 
-## Host on Vercel
-Import the repository in Vercel as a static site (framework preset: Other; no build command). Deploy. The provided HTTPS URL works with camera permissions.
+- **📷 Scan a card**: point the camera at a card and the app says the word, like the original reader.
+- **🎴 Flash cards**: flip through all cards by category, tap to hear the word, or let it auto-play.
+- **🎮 Find it!**: hear a word, then tap the matching picture (3, 4 or 6 choices). Earns stars.
+- **⚙️ Grown-ups** (press and hold): teach the reader a card it doesn't know, see all cards, pick the voice, export/import.
 
-## Local testing with camera
-Run `python -m http.server 8000` from this directory, then visit `http://localhost:8000` on the same computer. On a phone, use HTTPS hosting: accessing your computer over its LAN IP with HTTP generally does not meet secure-context requirements.
+Live: https://marshmellow-labs.github.io/talking-card/
 
-## Sharing trained patterns
-Train patterns using the app. Export `shared-patterns.json` from the Data tab and commit it to the same site folder. Other users will receive those starter patterns when they open the hosted site. Their own additional patterns remain local unless exported. No photos are transmitted to a server.
+## How the reader works
 
-## Limitations
-This is an optical pattern matcher, not a proven manufacturer-code decoder. Auto-detection expects one upright card with the strip near the bottom and may need adjustment. Distinctive pattern samples are needed for reliable identification. For similar stripe patterns, the app deliberately says Unknown instead of guessing. For robust detection, capture 2–3 examples per card under different lighting and verify against a separate photo.
+Each card has a black-and-white strip along its bottom edge. It is an **8-bit number**: after a white
+lead-in, eight cells are either black (1) or white (0). The numbers run in category order (family 33–40,
+shapes 45–52, animals 63–88, …, fruits 203–216). `src/detect.js`:
+
+1. finds the strip: the lowest band with bright paper *and* true-black bars, near where the on-screen guide puts the card's bottom edge;
+2. fits the card's left/right edges by searching around the guide position, scoring how cleanly the eight cells come out black or white, that the lead-in is white, and that the card ends at the fitted edges;
+3. decodes the eight cells; a read is *confident* only if every cell is clear and the number belongs to a known card;
+4. retries the image upside down.
+
+The camera reads ~5 frames per second, and a word is spoken only after 3 frames agree.
+
+Codes for 91 of the 94 cards are in `cards.json`. Colosseum, Eggplant and Fridge had glare in the
+reference photos: teach them once under **Grown-ups → Teach the reader a card**.
+
+## Development
+
+No build step: plain ES modules, served as static files.
+
+```sh
+npm install          # test-only dependencies (JPEG/PNG decoding in Node)
+npm test             # unit tests: strip fixtures, synthetic cards, game logic
+npm run serve        # http://localhost:8000 (the camera works on localhost or https)
+```
+
+`ref-images/` (the full reference photos) is git-ignored. When it exists locally, `npm test` also runs
+an accuracy check over every card in those photos (`npm run eval` prints the details). The tools in
+`tools/` extract cards from those photos (`extract-cards.mjs`), assign codes (`assign-codes.mjs`) and
+write the small committed strip fixtures (`make-fixtures.mjs`).
+
+Card pictures are [Twemoji](https://github.com/jdecked/twemoji) (CC-BY 4.0), bundled into
+`assets/emoji.svg` by `npm run sprite`.
+
+## Hosting
+
+Static files: GitHub Pages serves the `main` branch root. The service worker caches the app for
+offline use and refreshes files in the background, so updates appear on the next launch.
