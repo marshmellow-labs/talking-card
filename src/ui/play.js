@@ -1,20 +1,21 @@
-// "Find it!" game: hear a word, tap the matching picture. No camera needed.
-import { makeRound, LEVELS, addStar, CHEERS, pick, withArticle } from '../games.js';
+// "Find it!" game: hear a word, tap the matching mini card. No camera needed.
+// Grown-ups can hide the names and/or card colors once the child knows the pictures.
+import { makeRound, addStar, CHEERS, pick, withArticle, bestGrid } from '../games.js';
 import { store } from '../store.js';
 import { say } from '../speech.js';
 import { icon } from '../icons.js';
+import { CELLS } from '../detect.js';
 
 const $ = id => document.getElementById(id);
 let cards, round = null, recent = [], busy = false;
 
-function levelChips() {
-  const level = store.get().settings.level;
-  $('levels').replaceChildren(...Object.entries(LEVELS).map(([k, L]) => {
-    const b = document.createElement('button');
-    b.className = 'chip'; b.textContent = `${L.label} · ${L.choices}`; b.setAttribute('aria-pressed', String(k === level));
-    b.onclick = () => { store.setting('level', k); levelChips(); next(); };
-    return b;
-  }));
+function layout() {
+  const stage = $('choiceStage'), n = $('choices').children.length; if (!n) return;
+  const { width, height } = stage.getBoundingClientRect();
+  const gap = Math.max(8, Math.min(16, width / 40));
+  const { cols, tile } = bestGrid(n, width, height, gap);
+  const ch = $('choices');
+  ch.style.setProperty('--cols', cols); ch.style.setProperty('--tile', `${Math.min(tile, 260)}px`); ch.style.setProperty('--gap', `${gap}px`);
 }
 
 function burst(x, y) {
@@ -30,29 +31,44 @@ function burst(x, y) {
 
 function ask() { say(`Find ${withArticle(round.answer)}!`); }
 
+/** Decorative copy of the card's printed code strip (white lead-in, then 8 cells). */
+function strip(code) {
+  const el = document.createElement('div'); el.className = 'cstrip';
+  const bits = code === undefined ? '00000000' : code.toString(2).padStart(8, '0');
+  CELLS.forEach(([a, b], k) => {
+    if (bits[k] !== '1') return;
+    const i = document.createElement('i'); i.style.left = `${a * 100}%`; i.style.width = `${(b - a) * 100}%`;
+    el.append(i);
+  });
+  return el;
+}
+
+/** A small version of the real card: name on top, picture, code strip along the bottom. */
+function miniCard(c, { names, colors }) {
+  const b = document.createElement('button');
+  b.className = 'choice ' + (colors ? c.color : 'plain'); b.setAttribute('aria-label', c.name);
+  const label = document.createElement('small'); label.textContent = names ? c.name : '';
+  const p = document.createElement('div'); p.className = 'cp'; p.append(icon(c.emoji));
+  b.append(label, p, strip(c.code));
+  b.onclick = e => choose(c, b, label, e);
+  return b;
+}
+
 function next() {
   busy = false;
-  const { level } = store.get().settings;
+  const { level, findNames, findColors } = store.get().settings;
   round = makeRound(cards, { level, stars: store.get().stars, recent });
   recent = [round.answer.id, ...recent].slice(0, 8);
   $('target').textContent = round.answer.name;
   $('cheer').textContent = '';
-  const n = round.choices.length;
-  $('choices').style.setProperty('--cols', n === 4 ? 2 : 3);
-  $('choices').replaceChildren(...round.choices.map(c => {
-    const b = document.createElement('button');
-    b.className = 'choice'; b.setAttribute('aria-label', c.name);
-    const label = document.createElement('small');
-    b.append(icon(c.emoji), label);
-    b.onclick = e => choose(c, b, label, e);
-    return b;
-  }));
+  $('choices').replaceChildren(...round.choices.map(c => miniCard(c, { names: findNames, colors: findColors })));
+  layout();
   ask();
 }
 
 async function choose(c, b, label, e) {
   if (busy) return;
-  label.textContent = c.name;
+  label.textContent = c.name; // always reveal the name once tapped
   if (c.id === round.answer.id) {
     busy = true;
     b.classList.add('right');
@@ -70,6 +86,7 @@ async function choose(c, b, label, e) {
 export function init(ctx) {
   cards = ctx.cards;
   $('repeat').onclick = ask;
+  new ResizeObserver(layout).observe($('choiceStage'));
 }
-export function enter() { levelChips(); next(); }
-export function leave() { speechSynthesis?.cancel(); }
+export function enter() { next(); }
+export function leave() { globalThis.speechSynthesis?.cancel(); }
