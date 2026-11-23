@@ -4,161 +4,184 @@
     "name": "Lychee",
     "color": "green",
     "emoji": "🍒",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 212
   },
   {
     "id": 1,
     "name": "Cabbage",
     "color": "green",
     "emoji": "🥬",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 178
   },
   {
     "id": 2,
     "name": "Papaya",
     "color": "green",
     "emoji": "🥭",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 213
   },
   {
     "id": 3,
     "name": "Salad",
     "color": "yellow",
     "emoji": "🥗",
-    "category": "food"
+    "category": "food",
+    "code": 112
   },
   {
     "id": 4,
     "name": "Sweet Potato",
     "color": "green",
     "emoji": "🍠",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 196
   },
   {
     "id": 5,
     "name": "Tomato",
     "color": "green",
     "emoji": "🍅",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 182
   },
   {
     "id": 6,
     "name": "Black",
     "color": "blue",
     "emoji": "⚫",
-    "category": "color"
+    "category": "color",
+    "code": 2
   },
   {
     "id": 7,
     "name": "Orange",
     "color": "green",
     "emoji": "🍊",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 203
   },
   {
     "id": 8,
     "name": "Grandmother",
     "color": "blue",
     "emoji": "👵",
-    "category": "family"
+    "category": "family",
+    "code": 33
   },
   {
     "id": 9,
     "name": "Duck",
     "color": "yellow",
     "emoji": "🦆",
-    "category": "animal"
+    "category": "animal",
+    "code": 79
   },
   {
     "id": 10,
     "name": "Jackfruit",
     "color": "green",
     "emoji": "🍈",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 216
   },
   {
     "id": 11,
     "name": "Crescent",
     "color": "blue",
     "emoji": "🌙",
-    "category": "shape"
+    "category": "shape",
+    "code": 49
   },
   {
     "id": 12,
     "name": "Soap",
     "color": "pink",
     "emoji": "🧼",
-    "category": "object"
+    "category": "object",
+    "code": 133
   },
   {
     "id": 13,
     "name": "Taj Mahal",
     "color": "pink",
     "emoji": "🕌",
-    "category": "place"
+    "category": "place",
+    "code": 136
   },
   {
     "id": 14,
     "name": "Christ the Redeemer",
     "color": "pink",
     "emoji": "🗽",
-    "category": "place"
+    "category": "place",
+    "code": 152
   },
   {
     "id": 15,
     "name": "Candy",
     "color": "yellow",
     "emoji": "🍬",
-    "category": "food"
+    "category": "food",
+    "code": 106
   },
   {
     "id": 16,
     "name": "Sun",
     "color": "blue",
     "emoji": "☀️",
-    "category": "nature"
+    "category": "nature",
+    "code": 31
   },
   {
     "id": 17,
     "name": "Motor Bike",
     "color": "pink",
     "emoji": "🏍️",
-    "category": "transport"
+    "category": "transport",
+    "code": 162
   },
   {
     "id": 18,
     "name": "Clock",
     "color": "pink",
     "emoji": "⏰",
-    "category": "object"
+    "category": "object",
+    "code": 127
   },
   {
     "id": 19,
     "name": "Pizza",
     "color": "yellow",
     "emoji": "🍕",
-    "category": "food"
+    "category": "food",
+    "code": 92
   },
   {
     "id": 20,
     "name": "Grandfather",
     "color": "blue",
     "emoji": "👴",
-    "category": "family"
+    "category": "family",
+    "code": 40
   },
   {
     "id": 21,
     "name": "Cat",
     "color": "yellow",
     "emoji": "🐈",
-    "category": "animal"
+    "category": "animal",
+    "code": 63
   },
   {
     "id": 22,
     "name": "Frog",
     "color": "yellow",
     "emoji": "🐸",
-    "category": "animal"
+    "category": "animal",
+    "code": 76
   },
   {
     "id": 23,
@@ -179,245 +202,281 @@
     "name": "Van",
     "color": "pink",
     "emoji": "🚐",
-    "category": "transport"
+    "category": "transport",
+    "code": 154
   },
   {
     "id": 26,
     "name": "Burj Khalifa",
     "color": "pink",
     "emoji": "🏙️",
-    "category": "place"
+    "category": "place",
+    "code": 142
   },
   {
     "id": 27,
     "name": "Whale",
     "color": "yellow",
     "emoji": "🐋",
-    "category": "animal"
+    "category": "animal",
+    "code": 73
   },
   {
     "id": 28,
     "name": "Heart",
     "color": "blue",
     "emoji": "💗",
-    "category": "shape"
+    "category": "shape",
+    "code": 52
   },
   {
     "id": 29,
     "name": "Steamer",
     "color": "pink",
     "emoji": "🚢",
-    "category": "transport"
+    "category": "transport",
+    "code": 157
   },
   {
     "id": 30,
     "name": "Jeep",
     "color": "pink",
     "emoji": "🚙",
-    "category": "transport"
+    "category": "transport",
+    "code": 168
   },
   {
     "id": 31,
     "name": "Hot Air Balloon",
     "color": "pink",
     "emoji": "🎈",
-    "category": "transport"
+    "category": "transport",
+    "code": 166
   },
   {
     "id": 32,
     "name": "Soup",
     "color": "yellow",
     "emoji": "🍲",
-    "category": "food"
+    "category": "food",
+    "code": 108
   },
   {
     "id": 33,
     "name": "School Bag",
     "color": "pink",
     "emoji": "🎒",
-    "category": "object"
+    "category": "object",
+    "code": 114
   },
   {
     "id": 34,
     "name": "Shoes",
     "color": "pink",
     "emoji": "👟",
-    "category": "object"
+    "category": "object",
+    "code": 146,
+    "verify": true
   },
   {
     "id": 35,
     "name": "Crocodile",
     "color": "yellow",
     "emoji": "🐊",
-    "category": "animal"
+    "category": "animal",
+    "code": 71
   },
   {
     "id": 36,
     "name": "Fan",
     "color": "pink",
     "emoji": "🪭",
-    "category": "object"
+    "category": "object",
+    "code": 118
   },
   {
     "id": 37,
     "name": "Car",
     "color": "pink",
     "emoji": "🚗",
-    "category": "transport"
+    "category": "transport",
+    "code": 163
   },
   {
     "id": 38,
     "name": "Ginger",
     "color": "green",
     "emoji": "🫚",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 192
   },
   {
     "id": 39,
     "name": "Eagle",
     "color": "yellow",
     "emoji": "🦅",
-    "category": "animal"
+    "category": "animal",
+    "code": 87
   },
   {
     "id": 40,
     "name": "Police Car",
     "color": "pink",
     "emoji": "🚓",
-    "category": "transport"
+    "category": "transport",
+    "code": 159
   },
   {
     "id": 41,
     "name": "Sky",
     "color": "blue",
     "emoji": "🌤️",
-    "category": "nature"
+    "category": "nature",
+    "code": 27
   },
   {
     "id": 42,
     "name": "Brother",
     "color": "blue",
     "emoji": "👦",
-    "category": "family"
+    "category": "family",
+    "code": 38
   },
   {
     "id": 43,
     "name": "Doll",
     "color": "pink",
     "emoji": "🪆",
-    "category": "object"
+    "category": "object",
+    "code": 126
   },
   {
     "id": 44,
     "name": "Bread",
     "color": "yellow",
     "emoji": "🍞",
-    "category": "food"
+    "category": "food",
+    "code": 103
   },
   {
     "id": 45,
     "name": "Oval",
     "color": "blue",
     "emoji": "🟣",
-    "category": "shape"
+    "category": "shape",
+    "code": 46
   },
   {
     "id": 46,
     "name": "Machu Picchu",
     "color": "pink",
     "emoji": "⛰️",
-    "category": "place"
+    "category": "place",
+    "code": 149
   },
   {
     "id": 47,
     "name": "Table Lamp",
     "color": "pink",
     "emoji": "💡",
-    "category": "object"
+    "category": "object",
+    "code": 130
   },
   {
     "id": 48,
     "name": "Guava",
     "color": "green",
-    "emoji": "🍈",
-    "category": "fruit"
+    "emoji": "🍐",
+    "category": "fruit",
+    "code": 211
   },
   {
     "id": 49,
     "name": "Carrot",
     "color": "green",
     "emoji": "🥕",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 177
   },
   {
     "id": 50,
     "name": "Pomegranate",
     "color": "green",
     "emoji": "🍎",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 214
   },
   {
     "id": 51,
     "name": "Coffee",
     "color": "yellow",
     "emoji": "☕",
-    "category": "drink"
+    "category": "drink",
+    "code": 111
   },
   {
     "id": 52,
     "name": "Coriander",
     "color": "green",
     "emoji": "🌿",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 195
   },
   {
     "id": 53,
     "name": "Corn",
     "color": "green",
     "emoji": "🌽",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 181
   },
   {
     "id": 54,
     "name": "Grapes",
     "color": "green",
     "emoji": "🍇",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 204
   },
   {
     "id": 55,
     "name": "Aunt",
     "color": "blue",
     "emoji": "👩",
-    "category": "family"
+    "category": "family",
+    "code": 34
   },
   {
     "id": 56,
     "name": "Owl",
     "color": "yellow",
     "emoji": "🦉",
-    "category": "animal"
+    "category": "animal",
+    "code": 80
   },
   {
     "id": 57,
     "name": "Coconut",
     "color": "green",
     "emoji": "🥥",
-    "category": "fruit"
+    "category": "fruit",
+    "code": 215
   },
   {
     "id": 58,
     "name": "Square",
     "color": "blue",
     "emoji": "🟪",
-    "category": "shape"
+    "category": "shape",
+    "code": 50
   },
   {
     "id": 59,
     "name": "Pen",
     "color": "pink",
     "emoji": "🖊️",
-    "category": "object"
+    "category": "object",
+    "code": 134
   },
   {
     "id": 60,
@@ -431,230 +490,263 @@
     "name": "Stonehenge",
     "color": "pink",
     "emoji": "🪨",
-    "category": "place"
+    "category": "place",
+    "code": 151
   },
   {
     "id": 62,
     "name": "Beach",
     "color": "blue",
     "emoji": "🏖️",
-    "category": "nature"
+    "category": "nature",
+    "code": 24
   },
   {
     "id": 63,
     "name": "Train",
     "color": "pink",
     "emoji": "🚆",
-    "category": "transport"
+    "category": "transport",
+    "code": 161
   },
   {
     "id": 64,
     "name": "Chair",
     "color": "pink",
     "emoji": "🪑",
-    "category": "object"
+    "category": "object",
+    "code": 128
   },
   {
     "id": 65,
     "name": "Sandwich",
     "color": "yellow",
     "emoji": "🥪",
-    "category": "food"
+    "category": "food",
+    "code": 91
   },
   {
     "id": 66,
     "name": "Father",
     "color": "blue",
     "emoji": "👨",
-    "category": "family"
+    "category": "family",
+    "code": 39
   },
   {
     "id": 67,
     "name": "Fox",
     "color": "yellow",
     "emoji": "🦊",
-    "category": "animal"
+    "category": "animal",
+    "code": 64
   },
   {
     "id": 68,
     "name": "Giraffe",
     "color": "yellow",
     "emoji": "🦒",
-    "category": "animal"
+    "category": "animal",
+    "code": 75
   },
   {
     "id": 69,
     "name": "Pillow",
     "color": "pink",
     "emoji": "🛏️",
-    "category": "object"
+    "category": "object",
+    "code": 124
   },
   {
     "id": 70,
     "name": "Cable Car",
     "color": "green",
     "emoji": "🚠",
-    "category": "transport"
+    "category": "transport",
+    "code": 176
   },
   {
     "id": 71,
     "name": "Scooter",
     "color": "pink",
     "emoji": "🛵",
-    "category": "transport"
+    "category": "transport",
+    "code": 153
   },
   {
     "id": 72,
     "name": "The Great Pyramid of Giza",
     "color": "pink",
-    "emoji": "🔺",
-    "category": "place"
+    "emoji": "🏜️",
+    "category": "place",
+    "code": 141
   },
   {
     "id": 73,
     "name": "Penguin",
     "color": "yellow",
     "emoji": "🐧",
-    "category": "animal"
+    "category": "animal",
+    "code": 74
   },
   {
     "id": 74,
     "name": "Star",
     "color": "blue",
     "emoji": "⭐",
-    "category": "shape"
+    "category": "shape",
+    "code": 51
   },
   {
     "id": 75,
     "name": "Fire Engine",
     "color": "pink",
     "emoji": "🚒",
-    "category": "transport"
+    "category": "transport",
+    "code": 158
   },
   {
     "id": 76,
     "name": "Bicycle",
     "color": "pink",
     "emoji": "🚲",
-    "category": "transport"
+    "category": "transport",
+    "code": 167
   },
   {
     "id": 77,
     "name": "Sail Boat",
     "color": "pink",
     "emoji": "⛵",
-    "category": "transport"
+    "category": "transport",
+    "code": 165
   },
   {
     "id": 78,
     "name": "Popcorn",
     "color": "yellow",
     "emoji": "🍿",
-    "category": "food"
+    "category": "food",
+    "code": 107
   },
   {
     "id": 79,
     "name": "Sofa",
     "color": "pink",
     "emoji": "🛋️",
-    "category": "object"
+    "category": "object",
+    "code": 113
   },
   {
     "id": 80,
     "name": "Angkor Wat",
     "color": "pink",
-    "emoji": "🏯",
-    "category": "place"
+    "emoji": "🛕",
+    "category": "place",
+    "code": 145
   },
   {
     "id": 81,
     "name": "Monkey",
     "color": "yellow",
     "emoji": "🐒",
-    "category": "animal"
+    "category": "animal",
+    "code": 72
   },
   {
     "id": 82,
     "name": "Book",
     "color": "pink",
     "emoji": "📖",
-    "category": "object"
+    "category": "object",
+    "code": 117
   },
   {
     "id": 83,
     "name": "Bus",
     "color": "pink",
     "emoji": "🚌",
-    "category": "transport"
+    "category": "transport",
+    "code": 164
   },
   {
     "id": 84,
     "name": "Capsicum",
     "color": "green",
     "emoji": "🫑",
-    "category": "vegetable"
+    "category": "vegetable",
+    "code": 191
   },
   {
     "id": 85,
     "name": "Zebra",
     "color": "yellow",
     "emoji": "🦓",
-    "category": "animal"
+    "category": "animal",
+    "code": 88
   },
   {
     "id": 86,
     "name": "Airplane",
     "color": "pink",
     "emoji": "✈️",
-    "category": "transport"
+    "category": "transport",
+    "code": 160
   },
   {
     "id": 87,
     "name": "Meadow",
     "color": "blue",
     "emoji": "🏞️",
-    "category": "nature"
+    "category": "nature",
+    "code": 28
   },
   {
     "id": 88,
     "name": "Uncle",
     "color": "blue",
-    "emoji": "👨",
-    "category": "family"
+    "emoji": "🧔",
+    "category": "family",
+    "code": 37
   },
   {
     "id": 89,
     "name": "Mobile Phone",
     "color": "pink",
     "emoji": "📱",
-    "category": "object"
+    "category": "object",
+    "code": 125
   },
   {
     "id": 90,
     "name": "Hamburger",
     "color": "yellow",
     "emoji": "🍔",
-    "category": "food"
+    "category": "food",
+    "code": 96
   },
   {
     "id": 91,
     "name": "Triangle",
     "color": "blue",
     "emoji": "🔺",
-    "category": "shape"
+    "category": "shape",
+    "code": 45
   },
   {
     "id": 92,
     "name": "Great Wall of China",
     "color": "pink",
-    "emoji": "🏯",
-    "category": "place"
+    "emoji": "🧱",
+    "category": "place",
+    "code": 150
   },
   {
     "id": 93,
     "name": "Cup",
     "color": "pink",
-    "emoji": "☕",
-    "category": "object"
+    "emoji": "🍵",
+    "category": "object",
+    "code": 129
   }
 ]
