@@ -1,6 +1,130 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#283657"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./icon-192.png"><title>Talking Cards Reader</title><style>
-:root{font:16px system-ui,sans-serif;color:#26314c;background:#f5f7fc}*{box-sizing:border-box}body{margin:0}.wrap{max-width:940px;margin:auto;padding:16px}header{display:flex;justify-content:space-between;align-items:center;gap:10px}h1{font-size:clamp(22px,5vw,32px);margin:12px 0}nav,.controls{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}button,select,input{font:inherit;border:1px solid #cbd3e2;border-radius:10px;padding:10px;background:white;color:#26314c}button{cursor:pointer}button.primary,nav button.active{background:#344bc0;color:white;border-color:#344bc0}.panel{background:white;border-radius:16px;padding:16px;box-shadow:0 4px 22px #25345a0c}.hidden{display:none!important}.muted{color:#65718b;font-size:14px}.status{padding:10px 12px;background:#f0f3fb;border-radius:10px;margin:12px 0;min-height:42px}.viewer{position:relative;background:#18213a;border-radius:12px;overflow:hidden;touch-action:none;max-height:65vh;display:flex;justify-content:center;align-items:center}.viewer canvas{display:block;max-width:100%;max-height:65vh;touch-action:none}.viewer video{display:none}.result{display:flex;align-items:center;gap:14px;background:#f6f7fb;padding:12px;border-radius:12px;margin:12px 0}.emoji{font-size:46px}.word{font-size:25px;font-weight:750}.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(125px,1fr));gap:9px;margin-top:12px}.card{border:1px solid #dce1e9;border-radius:12px;padding:12px;text-align:center}.card .emoji{font-size:32px}.green{background:#e9f3bf}.yellow{background:#fff0b9}.blue{background:#e2edff}.pink{background:#fbe4ed}.card small{display:block;font-size:12px}.pill{font-size:12px;padding:4px 9px;border-radius:99px;background:#e9edf8}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}input[type=search]{flex:1;min-width:170px}.help{font-size:14px;line-height:1.55}.warn{color:#9c451f}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}@media(max-width:550px){.two{grid-template-columns:1fr}}
-</style></head><body><div class="wrap"><header><h1>🃏 Talking Cards</h1><span class="pill" id="total">Offline ready</span></header><nav><button data-tab="reader" class="active">📷 Reader</button><button data-tab="library">🗂 Library</button><button data-tab="data">💾 Data & help</button></nav>
-<section id="reader" class="panel"><p class="muted">One upright card per image. The bottom optical strip is located automatically; adjust the box by dragging it or its corners.</p><div class="controls"><button class="primary" id="camera">Start camera</button><button id="snap">Capture</button><button id="uploadBtn">Choose photo</button><button id="stop">Stop camera</button></div><div class="viewer"><video id="video" autoplay muted playsinline></video><canvas id="view"></canvas></div><div class="status" id="status">Choose a photo or start the camera.</div><div class="controls"><button id="auto">↻ Auto-detect strip</button><button id="match" class="primary">Identify card</button><button id="speak">🔊 Speak</button></div><div class="result"><div class="emoji" id="emoji">🃏</div><div><div class="word" id="word">No card identified</div><div class="muted" id="details">Awaiting scan</div></div></div><div class="two"><div><label for="learnCard">Correct card name</label><select id="learnCard" style="width:100%"></select></div><div style="align-self:end"><button id="learn" class="primary" style="width:100%">Teach this pattern</button></div></div><p class="muted">Unknown patterns remain unknown instead of guessing. Teach a card using a good photo, then test it using a different photo.</p><input id="file" type="file" accept="image/*" capture="environment" hidden></section>
-<section id="library" class="panel hidden"><div class="row"><input type="search" id="search" placeholder="Search cards…"><select id="color"><option value="">All colors</option><option>green</option><option>yellow</option><option>blue</option><option>pink</option></select><select id="category"><option value="">All categories</option></select></div><div class="muted" id="shown"></div><div class="cards" id="cards"></div></section>
-<section id="data" class="panel hidden"><h2>Saved reference patterns</h2><p id="stats"></p><div class="controls"><button id="export">Export trained patterns</button><button id="import">Import trained patterns</button><button id="clear">Clear learned patterns</button></div><input type="file" id="importFile" accept="application/json" hidden><p class="help">Patterns are saved in this browser only. Export them to share a trained library with family; importing merges the references. For everyone to receive the same patterns automatically, include an exported <code>shared-patterns.json</code> in the deployed site folder.</p><h2>Camera and hosting</h2><p class="help">Browser camera access generally requires HTTPS or <code>http://localhost</code>. Opening <code>index.html</code> directly as a <code>file://</code> page is not a dependable way to use the camera. GitHub Pages and Vercel provide HTTPS. Once hosted, open the page and use your browser's “Add to Home screen” / “Install app” option. Offline use works after the site has been loaded and cached. No images are uploaded.</p><p class="help">This app uses built-in Canvas pixel processing (no external CV download), including contrast thresholding and row/column projections. It does not yet decode the manufacturer's numeric scheme; it matches learned optical signatures.</p></section></div><script src="./app.js" defer></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffb347">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon-192.png">
+<link rel="apple-touch-icon" href="./icon-192.png">
+<link rel="stylesheet" href="./css/app.css">
+<title>Talking Cards</title>
+</head>
+<body>
+<header class="bar">
+  <button class="round" id="homeBtn" aria-label="Home" hidden>🏠</button>
+  <h1 id="title">Talking Cards</h1>
+  <span class="stars" id="stars" aria-label="Stars collected">⭐ <b>0</b></span>
+</header>
+
+<main>
+  <!-- Home -->
+  <section id="home" class="screen">
+    <div class="tiles">
+      <a class="tile scan" href="#/scan"><span class="big">📷</span><b>Scan a card</b><small>Show me a card!</small></a>
+      <a class="tile flash" href="#/flash"><span class="big">🎴</span><b>Flash cards</b><small>Look and listen</small></a>
+      <a class="tile play" href="#/play"><span class="big">🎮</span><b>Find it!</b><small>Tap the right picture</small></a>
+    </div>
+    <div class="grownups">
+      <button id="parentHold" class="hold" aria-label="Grown-ups: press and hold">
+        <span>⚙️</span><span class="ring"></span>
+      </button>
+      <small>Grown-ups: press and hold</small>
+    </div>
+  </section>
+
+  <!-- Scan -->
+  <section id="scan" class="screen" hidden>
+    <div class="cam" id="cam">
+      <video playsinline muted></video>
+      <div class="guide"><span class="hint">Stripes go here ⬇</span></div>
+      <div class="cam-msg" id="camMsg">Tap <b>Start</b> to use the camera</div>
+    </div>
+    <div class="row center">
+      <button class="pill primary" id="camStart">▶ Start</button>
+      <button class="pill" id="torch" hidden>🔦 Light</button>
+    </div>
+    <div class="result" id="scanResult" aria-live="polite">
+      <div class="res-pic" id="resPic"></div>
+      <div><div class="res-word" id="resWord">Put a card in the box</div><div class="res-sub" id="resSub">stripes at the bottom</div></div>
+      <button class="round" id="sayAgain" aria-label="Say it again" hidden>🔊</button>
+    </div>
+  </section>
+
+  <!-- Flash cards -->
+  <section id="flash" class="screen" hidden>
+    <div class="chips" id="flashCats"></div>
+    <div class="flashcard" id="flashCard" role="button" tabindex="0" aria-label="Say the word">
+      <div class="fc-pic" id="fcPic"></div>
+      <div class="fc-word" id="fcWord"></div>
+      <div class="fc-cat" id="fcCat"></div>
+    </div>
+    <div class="row center">
+      <button class="round big" id="fcPrev" aria-label="Previous">◀</button>
+      <span class="count" id="fcCount"></span>
+      <button class="round big" id="fcNext" aria-label="Next">▶</button>
+    </div>
+    <div class="row center">
+      <button class="pill" id="fcShuffle">🔀 Mix</button>
+      <button class="pill" id="fcAuto">⏯ Auto</button>
+    </div>
+  </section>
+
+  <!-- Find it -->
+  <section id="play" class="screen" hidden>
+    <div class="chips" id="levels"></div>
+    <div class="prompt">
+      <button class="round" id="repeat" aria-label="Say it again">🔊</button>
+      <div>Find <b id="target"></b></div>
+    </div>
+    <div class="choices" id="choices"></div>
+    <div class="cheer" id="cheer" aria-live="polite"></div>
+  </section>
+
+  <!-- Grown-ups -->
+  <section id="parent" class="screen" hidden>
+    <details open>
+      <summary>Teach the reader a card</summary>
+      <p class="help">If a card isn't recognised (or is wrong), scan it here and choose its name. This is saved on this device.</p>
+      <div class="cam small" id="teachCam">
+        <video playsinline muted></video>
+        <div class="guide"><span class="hint">Stripes go here ⬇</span></div>
+      </div>
+      <div class="row center"><button class="pill primary" id="teachStart">▶ Start camera</button></div>
+      <p class="code-line" id="teachRead">No card read yet.</p>
+      <div class="row"><select id="teachCard"></select><button class="pill primary" id="teachSave" disabled>Save</button></div>
+    </details>
+    <details>
+      <summary>All cards</summary>
+      <p class="help" id="libStats"></p>
+      <div class="lib" id="lib"></div>
+    </details>
+    <details>
+      <summary>Voice and game</summary>
+      <label>Voice <select id="voice"></select></label>
+      <label>Speed <input type="range" id="rate" min="0.5" max="1.2" step="0.05"></label>
+      <button class="pill" id="testVoice">🔊 Test voice</button>
+    </details>
+    <details>
+      <summary>Data</summary>
+      <div class="row">
+        <button class="pill" id="export">⬇ Export taught cards</button>
+        <button class="pill" id="import">⬆ Import</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+      <div class="row">
+        <button class="pill" id="resetStars">Reset stars</button>
+        <button class="pill" id="resetLearned">Forget taught cards</button>
+      </div>
+    </details>
+    <details>
+      <summary>Help</summary>
+      <p class="help">The reader decodes the black-and-white stripes on the bottom edge of each card, like the original talking-card reader. Hold the card flat inside the box, stripes at the bottom, in good light. If light reflects off the shiny card, tilt it slightly.</p>
+      <p class="help">The camera needs https (or localhost). Nothing is uploaded: pictures never leave this device. Add the app to your home screen to use it offline.</p>
+      <p class="help">Pictures: <a href="https://github.com/jdecked/twemoji" target="_blank" rel="noopener">Twemoji</a>, © Twitter, Inc and other contributors, licensed <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC-BY 4.0</a>.</p>
+    </details>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
