@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="sunny">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
 <meta name="theme-color" content="#ffb347">
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="icon" href="./icon-192.png">
@@ -13,77 +13,102 @@
 <body>
 <header class="bar">
   <button class="round" id="homeBtn" aria-label="Home" hidden>🏠</button>
-  <h1 id="title">Talking Cards</h1>
+  <h1 id="title"><span class="mascot" aria-hidden="true"></span><span id="titleText">Talking Cards</span></h1>
   <span class="stars" id="stars" aria-label="Stars collected">⭐ <b>0</b></span>
+  <button id="parentHold" class="hold" aria-label="Grown-ups: press and hold">
+    <span>⚙️</span><span class="ring"></span>
+  </button>
 </header>
+<div class="toast" id="toast" role="status" hidden></div>
 
 <main>
   <!-- Home -->
-  <section id="home" class="screen">
+  <section id="home" class="screen fit">
     <div class="tiles">
-      <a class="tile scan" href="#/scan"><span class="big">📷</span><b>Scan a card</b><small>Show me a card!</small></a>
-      <a class="tile flash" href="#/flash"><span class="big">🎴</span><b>Flash cards</b><small>Look and listen</small></a>
-      <a class="tile play" href="#/play"><span class="big">🎮</span><b>Find it!</b><small>Tap the right picture</small></a>
-    </div>
-    <div class="grownups">
-      <button id="parentHold" class="hold" aria-label="Grown-ups: press and hold">
-        <span>⚙️</span><span class="ring"></span>
-      </button>
-      <small>Grown-ups: press and hold</small>
+      <a class="tile scan" href="#/scan"><span class="big" data-icon="📷"></span><b>Scan a card</b><small>Show me a card!</small></a>
+      <a class="tile flash" href="#/flash"><span class="big" data-icon="🎴"></span><b>Flash cards</b><small>Look and listen</small></a>
+      <a class="tile play" href="#/play"><span class="big" data-icon="🎮"></span><b>Find it!</b><small>Tap the right card</small></a>
     </div>
   </section>
 
   <!-- Scan -->
-  <section id="scan" class="screen" hidden>
-    <div class="cam" id="cam">
-      <video playsinline muted></video>
-      <div class="guide"><span class="hint">Stripes go here ⬇</span></div>
-      <div class="cam-msg" id="camMsg">Tap <b>Start</b> to use the camera</div>
-    </div>
-    <div class="row center">
-      <button class="pill primary" id="camStart">▶ Start</button>
-      <button class="pill" id="torch" hidden>🔦 Light</button>
+  <section id="scan" class="screen fit" hidden>
+    <div class="stage" id="scanStage">
+      <div class="cam" id="cam">
+        <video playsinline muted></video>
+        <div class="guide"><span class="hint">Stripes go here ⬇</span></div>
+        <div class="cam-msg" id="camMsg">Tap <b>Start</b> to use the camera</div>
+      </div>
     </div>
     <div class="result" id="scanResult" aria-live="polite">
       <div class="res-pic" id="resPic"></div>
-      <div><div class="res-word" id="resWord">Put a card in the box</div><div class="res-sub" id="resSub">stripes at the bottom</div></div>
+      <div class="res-text"><div class="res-word" id="resWord">Put a card in the box</div><div class="res-sub" id="resSub">stripes at the bottom</div></div>
       <button class="round" id="sayAgain" aria-label="Say it again" hidden>🔊</button>
+    </div>
+    <div class="row center tight">
+      <button class="pill primary" id="camStart">▶ Start</button>
+      <button class="pill" id="torch" hidden>🔦 Light</button>
     </div>
   </section>
 
   <!-- Flash cards -->
-  <section id="flash" class="screen" hidden>
-    <div class="chips" id="flashCats"></div>
-    <div class="flashcard" id="flashCard" role="button" tabindex="0" aria-label="Say the word">
-      <div class="fc-pic" id="fcPic"></div>
-      <div class="fc-word" id="fcWord"></div>
-      <div class="fc-cat" id="fcCat"></div>
-    </div>
-    <div class="row center">
-      <button class="round big" id="fcPrev" aria-label="Previous">◀</button>
+  <section id="flash" class="screen fit" hidden>
+    <div class="row tight">
+      <button class="pill" id="fcFilters" aria-haspopup="dialog">🎛 Filters</button>
+      <span class="filter-sum" id="fcSummary"></span>
       <span class="count" id="fcCount"></span>
+    </div>
+    <div class="stage" id="fcStage">
+      <div class="flashcard" id="flashCard" role="button" tabindex="0" aria-label="Say the word">
+        <div class="fc-pic" id="fcPic"></div>
+        <div class="fc-word" id="fcWord"></div>
+        <div class="fc-cat" id="fcCat"></div>
+      </div>
+    </div>
+    <div class="row center tight">
+      <button class="round big" id="fcPrev" aria-label="Previous">◀</button>
+      <button class="round big" id="fcSay" aria-label="Say it">🔊</button>
       <button class="round big" id="fcNext" aria-label="Next">▶</button>
     </div>
-    <div class="row center">
-      <button class="pill" id="fcShuffle">🔀 Mix</button>
-      <button class="pill" id="fcAuto">⏯ Auto</button>
-    </div>
+    <dialog class="sheet" id="fcSheet">
+      <form method="dialog">
+        <h2>Filters</h2>
+        <h3>Category</h3><div class="chips wrap" id="flashCats"></div>
+        <h3>Card color</h3><div class="chips wrap" id="flashColors"></div>
+        <h3>Play</h3>
+        <div class="chips wrap">
+          <button type="button" class="chip" id="fcShuffle" aria-pressed="false">🔀 Mix up</button>
+          <button type="button" class="chip" id="fcAuto" aria-pressed="false">⏯ Auto play</button>
+        </div>
+        <button class="pill primary done">Done</button>
+      </form>
+    </dialog>
   </section>
 
   <!-- Find it -->
-  <section id="play" class="screen" hidden>
-    <div class="chips" id="levels"></div>
+  <section id="play" class="screen fit" hidden>
     <div class="prompt">
       <button class="round" id="repeat" aria-label="Say it again">🔊</button>
       <div>Find <b id="target"></b></div>
     </div>
-    <div class="choices" id="choices"></div>
+    <div class="stage" id="choiceStage"><div class="choices" id="choices"></div></div>
     <div class="cheer" id="cheer" aria-live="polite"></div>
   </section>
 
   <!-- Grown-ups -->
-  <section id="parent" class="screen" hidden>
+  <section id="parent" class="screen scroll" hidden>
     <details open>
+      <summary>Look</summary>
+      <div class="themes" id="themes"></div>
+    </details>
+    <details>
+      <summary>Find it! game</summary>
+      <h3>Level</h3><div class="chips wrap" id="levels"></div>
+      <label class="switch"><input type="checkbox" id="optNames"> Show names on the cards</label>
+      <label class="switch"><input type="checkbox" id="optColors"> Show card colors</label>
+      <p class="help">Turn these off once your child knows the pictures, so they listen for the word.</p>
+    </details>
+    <details>
       <summary>Teach the reader a card</summary>
       <p class="help">If a card isn't recognised (or is wrong), scan it here and choose its name. This is saved on this device.</p>
       <div class="cam small" id="teachCam">
@@ -100,7 +125,7 @@
       <div class="lib" id="lib"></div>
     </details>
     <details>
-      <summary>Voice and game</summary>
+      <summary>Voice</summary>
       <label>Voice <select id="voice"></select></label>
       <label>Speed <input type="range" id="rate" min="0.5" max="1.2" step="0.05"></label>
       <button class="pill" id="testVoice">🔊 Test voice</button>

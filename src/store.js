@@ -1,6 +1,6 @@
 // Small localStorage-backed state: stars, codes taught by a parent, and settings.
 const KEY = 'talking-cards-v4';
-const defaults = { stars: {}, learned: {}, settings: { rate: 0.85, voice: '', level: 'easy' } };
+const defaults = { stars: {}, learned: {}, settings: { rate: 0.85, voice: '', level: 'easy', theme: 'sunny', findNames: true, findColors: true } };
 
 function read() {
   try { const s = JSON.parse(localStorage.getItem(KEY) || '{}'); return { ...defaults, ...s, settings: { ...defaults.settings, ...s.settings } }; }
