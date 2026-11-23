@@ -1,6 +1,6 @@
 // Offline support: pre-cache the app shell, then serve from cache while refreshing in the background
 // (stale-while-revalidate), so a new version shows up on the next launch.
-const CACHE = 'talking-cards-v4';
+const CACHE = 'talking-cards-v5';
 const FILES = ['./', './index.html', './css/app.css', './cards.json', './manifest.webmanifest', './icon-192.png', './icon-512.png',
   './assets/emoji.svg', './src/main.js', './src/detect.js', './src/camera.js', './src/games.js', './src/icons.js', './src/speech.js',
   './src/store.js', './src/ui/scan.js', './src/ui/flash.js', './src/ui/play.js', './src/ui/parent.js', './src/ui/chips.js'];
